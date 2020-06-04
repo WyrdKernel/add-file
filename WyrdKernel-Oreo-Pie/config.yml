@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: mfiqrizalvi/wyrd_docker:latest
+    steps:
+      - checkout
+      - run: apt-get -y update && apt-get -y upgrade
+      - run: git clone https://github.com/mfiqrizalvi/kernel_xiaomi_msm8917 --depth=1 -b lineage-16.0 .
+      - run: echo 'export token=$token' >> $BASH_ENV
+      - run: wget https://github.com/fadlyas07/Scripts/raw/master/kernel.sh
+      - run: bash kernel.sh
